@@ -1,0 +1,25 @@
+#
+# FreeIPA
+#
+freeipa_pass:
+
+#
+# MariaDB
+#
+mariadb_admin_home: '/root'
+mariadb_admin_user: 'admin'
+mariadb_admin_password:
+mariadb_admin_hosts:
+
+#
+# Slurm configuration
+#
+db_host: database.sanbi.ac.za
+db_user: "{{ mariadb_admin_user }}"
+db_pass: "{{ mariadb_admin_password }}"
+db_port: 3306
+slurm_version: 17.02.11
+slurm_install_dir: /tools/admin/slurm
+slurm_mariadb_name: slurm
+slurm_mariadb_pass:
+conf_dir: /tmp 
