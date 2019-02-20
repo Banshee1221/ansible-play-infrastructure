@@ -1,25 +1,33 @@
 #
-# FreeIPA
+# Common Role
 #
-freeipa_pass:
+freeipa_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/freeipa/password:value')}}"
 
 #
-# MariaDB
+# Database Role
 #
 mariadb_admin_home: '/root'
 mariadb_admin_user: 'admin'
-mariadb_admin_password:
-mariadb_admin_hosts:
+mariadb_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/password:value')}}"
+mariadb_admin_hosts: 
+  - '127.0.0.1'
+  - 'localhost'
+  - '192.168.10.%'
 
 #
-# Slurm configuration
+# Slurm Role
 #
+
 db_host: database.sanbi.ac.za
-db_user: "{{ mariadb_admin_user }}"
-db_pass: "{{ mariadb_admin_password }}"
+db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_user:value)}}"
+db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_pass:value)}}"
 db_port: 3306
 slurm_version: 17.02.11
 slurm_install_dir: /tools/admin/slurm
-slurm_mariadb_name: slurm
-slurm_mariadb_pass:
+slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_user:value)}}"
+slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_pass:value)}}"
+
+# Enable Slurm DRMAA for Galaxy
+slurm_drmaa_support: True
+slurm_drmaa_version: 1.2.0-dev.44cc67e
 conf_dir: /tmp 

@@ -2,7 +2,12 @@
 ansible_ssh_user=ubuntu
 ansible_become=True
 ansible_private_key_file=/home/ubuntu/.ssh/id_rsa
+enable_monitoring=True
 
+[slurm:vars]
+# DO NOT USE DEFAULT AS A NAME FOR SLURM
+# IT IS A SPECIAL PARTITION
+partitions="['main']"
 
 [database]
 database.sanbi.ac.za
@@ -10,5 +15,12 @@ database.sanbi.ac.za
 [slurm]
 queue.sanbi.ac.za headnode=True slurm_builder=True
 cmc1-04-hpc.sanbi.ac.za
-cmc2-01-hpc.sanbi.ac.za
+cmc2-01-hpc.sanbi.ac.za 
 cmc2-04-hpc.sanbi.ac.za
+#cmc1-08-hpc-hm.sanbi.ac.za partitions="['main', 'hightmem']"
+
+[test]
+database.sanbi.ac.za
+
+[monitoring]
+monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
