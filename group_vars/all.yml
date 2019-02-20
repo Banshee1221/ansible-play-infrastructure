@@ -19,13 +19,13 @@ mariadb_admin_hosts:
 #
 
 db_host: database.sanbi.ac.za
-db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_user:value)}}"
-db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_pass:value)}}"
+db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_user:value')}}"
+db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/admin_pass:value')}}"
 db_port: 3306
 slurm_version: 17.02.11
 slurm_install_dir: /tools/admin/slurm
-slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_user:value)}}"
-slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_pass:value)}}"
+slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_user:value')}}"
+slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/slurm_db_pass:value')}}"
 
 # Enable Slurm DRMAA for Galaxy
 slurm_drmaa_support: True

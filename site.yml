@@ -8,10 +8,10 @@
       raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
       register: output
       changed_when: output.stdout != ""
-    - name: Gathering Facts
-      setup:
       tags:
         - presetup
+    - name: Gathering Facts
+      setup:
   roles:
     - role: ansible-role-common
       tags:
@@ -28,11 +28,7 @@
   become: true
   roles:
   - role: ansible-role-cephfs_client
-    tags:
-      - slurm
   - role: ansible-role-slurm
-    tags:
-      - slurm
   - role: ansible-role-cluster 
-    tags:
+  tags:
     - slurm
