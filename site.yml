@@ -21,8 +21,8 @@
   become: true
   roles:
   - role: ansible-role-mariadb
-    tags:
-      - database
+  tags:
+    - database
 
 - hosts: slurm
   become: true
