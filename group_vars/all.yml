@@ -17,7 +17,7 @@ mariadb_admin_hosts:
 #
 # Slurm Role
 #
-
+# roles/ansible-role-slurm
 db_host: database.sanbi.ac.za
 db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database:user')}}"
 db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database:password')}}"
@@ -26,8 +26,17 @@ slurm_version: 17.02.11
 slurm_install_dir: /tools/admin/slurm
 slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_user')}}"
 slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_password')}}"
-
 # Enable Slurm DRMAA for Galaxy
 slurm_drmaa_support: True
 slurm_drmaa_version: 1.2.0-dev.44cc67e
-conf_dir: /tmp 
+conf_dir: /tmp
+#
+# roles/ansible-role-cephfs_client
+#
+cephfs_client_mapping:
+  - {"src": "/people", "dst": "/usr/people", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:token')}}"}
+  - {"src": "/tools", "dst": "/tools", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:token')}}"}
+#
+# roles/ansible-role-cluster
+#
+tools_dir: "/tools"
