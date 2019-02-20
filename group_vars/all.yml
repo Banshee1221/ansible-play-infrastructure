@@ -1,14 +1,14 @@
 #
 # Common Role
 #
-freeipa_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/freeipa/password:value')}}"
+freeipa_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/freeipa:password')}}"
 
 #
 # Database Role
 #
 mariadb_admin_home: '/root'
 mariadb_admin_user: 'admin'
-mariadb_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/password:value')}}"
+mariadb_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/database:password')}}"
 mariadb_admin_hosts: 
   - '127.0.0.1'
   - 'localhost'
@@ -19,13 +19,13 @@ mariadb_admin_hosts:
 #
 
 db_host: database.sanbi.ac.za
-db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/user:value')}}"
-db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database/password:value')}}"
+db_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/database:user')}}"
+db_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/database:password')}}"
 db_port: 3306
 slurm_version: 17.02.11
 slurm_install_dir: /tools/admin/slurm
-slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/db_user:value')}}"
-slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm/db_password:value')}}"
+slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_user')}}"
+slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_password')}}"
 
 # Enable Slurm DRMAA for Galaxy
 slurm_drmaa_support: True
