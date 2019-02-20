@@ -1,0 +1,34 @@
+---
+
+- hosts: all
+  become: true
+  gather_facts: false
+  pre_tasks:
+    - name: Install python2 for Ansible
+      raw: bash -c "test -e /usr/bin/python || (apt -qqy update && apt install -qqy python-minimal)"
+      register: output
+      changed_when: output.stdout != ""
+      tags:
+        - presetup
+    - name: Gathering Facts
+      setup:
+  roles:
+    - role: ansible-role-common
+      tags:
+        - common
+ 
+- hosts: database
+  become: true
+  roles:
+  - role: ansible-role-mariadb
+  tags:
+    - database
+
+- hosts: slurm
+  become: true
+  roles:
+  - role: ansible-role-cephfs_client
+  - role: ansible-role-slurm
+  - role: ansible-role-cluster 
+  tags:
+    - slurm
