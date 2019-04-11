@@ -16,9 +16,12 @@
 [submodule "roles/ansible-role-gateway"]
 	path = roles/ansible-role-gateway
 	url = https://github.com/Banshee1221/ansible-role-gateway.git
-[submodule "roles/ansible-role-java"]
-	path = roles/ansible-role-java
+[submodule "roles/geerlingguy.java"]
+	path = roles/geerlingguy.java
 	url = https://github.com/geerlingguy/ansible-role-java.git
-[submodule "roles/ansible-role-jenkins"]
-	path = roles/ansible-role-jenkins
+[submodule "roles/geerlingguy.jenkins"]
+	path = roles/geerlingguy.jenkins
 	url = https://github.com/geerlingguy/ansible-role-jenkins.git
+[submodule "roles/ansible-role-nginx"]
+	path = roles/ansible-role-nginx
+	url = https://github.com/nginxinc/ansible-role-nginx.git
