@@ -40,3 +40,10 @@ cephfs_client_mapping:
 # roles/ansible-role-cluster
 #
 tools_dir: "/tools"
+
+# ansible-role-jenkins (https://github.com/geerlingguy/ansible-role-jenkins.git)
+
+jenkins_hostname: "{{ ansible_fqdn }}"
+jenkins_admin_username: "{{ lookup('hashi_vault', 'secret=secret/ansible/jenkins:user')}}"
+jenkins_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/jenkins:password')}}"
+jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Africa/Johannesburg"

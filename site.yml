@@ -16,6 +16,11 @@
     - role: ansible-role-common
       tags:
         - common
+
+- hosts: remote
+  become: true
+  roles:
+    - role: ansible-role-gateway
  
 - hosts: database
   become: true

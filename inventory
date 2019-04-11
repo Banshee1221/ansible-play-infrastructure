@@ -14,13 +14,23 @@ database.sanbi.ac.za
 
 [slurm]
 queue.sanbi.ac.za headnode=True slurm_builder=True
-cmc1-04-hpc.sanbi.ac.za
+#cmc1-04-hpc.sanbi.ac.za
 cmc2-01-hpc.sanbi.ac.za 
 cmc2-04-hpc.sanbi.ac.za
-#cmc1-08-hpc-hm.sanbi.ac.za partitions="['main', 'hightmem']"
+cmc1-02-hpc.sanbi.ac.za
+cmc1-05-hpc.sanbi.ac.za
+cmc1-06-hpc.sanbi.ac.za
+cmc1-08-hpc-hm.sanbi.ac.za
+cmc1-09-hpc.sanbi.ac.za
 
 [test]
 database.sanbi.ac.za
 
-[monitoring]
-monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
+#[monitoring]
+#monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
+
+[remote]
+tunnel.sanbi.ac.za
+
+[jenkins]
+jenkins.sanbi.ac.za
