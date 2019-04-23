@@ -41,6 +41,10 @@
 - hosts: monitoring
   become: true
   pre_tasks:
+    - name: Ensure consul group
+      group:
+        name: consul
+        state: present
     - name: Ensure consul user
       user:
         name: consul
