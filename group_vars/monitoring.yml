@@ -1,7 +1,6 @@
 enable_node_exporter: True
 
 node_exporter_version: 0.17.0
-consul_version: 1.4.4
 
 # Prometheus setup
 prometheus_version: 2.9.1
@@ -27,3 +26,11 @@ grafana_datasources:
     access: proxy
     url: 'http://{{ prometheus_web_listen_address }}'
     basicAuth: false
+
+# Consol setup
+consul_version: 1.4.4
+consul_config_path: /monitoring/consul/
+consul_configd_path: /monitoring/consul/conf.d
+consul_data_path: /monitoring/consul/data
+consul_domain: sanbi.ac.za
+consul_node_role: bootstrap

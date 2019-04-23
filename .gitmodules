@@ -31,3 +31,6 @@
 [submodule "roles/cloudalchemy.ansible-grafana"]
 	path = roles/cloudalchemy.ansible-grafana
 	url = https://github.com/cloudalchemy/ansible-grafana.git
+[submodule "roles/brianshumate.ansible-consul"]
+	path = roles/brianshumate.ansible-consul
+	url = https://github.com/brianshumate/ansible-consul.git
