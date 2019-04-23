@@ -5,7 +5,7 @@ ansible_private_key_file=/home/ubuntu/.ssh/id_rsa
 enable_monitoring=True
 
 [slurm:vars]
-# DO NOT USE DEFAULT AS A NAME FOR SLURM
+# DO NOT USE "default" AS A NAME FOR SLURM
 # IT IS A SPECIAL PARTITION
 partitions="['main']"
 
@@ -23,14 +23,11 @@ cmc1-06-hpc.sanbi.ac.za
 cmc1-08-hpc-hm.sanbi.ac.za
 cmc1-09-hpc.sanbi.ac.za
 
-[test]
-database.sanbi.ac.za
+[monitoring]
+monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
 
-#[monitoring]
-#monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
+#[remote]
+#tunnel.sanbi.ac.za
 
-[remote]
-tunnel.sanbi.ac.za
-
-[jenkins]
-jenkins.sanbi.ac.za
+#[jenkins]
+#jenkins.sanbi.ac.za

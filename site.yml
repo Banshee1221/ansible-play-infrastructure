@@ -53,10 +53,13 @@
     - role: geerlingguy.jenkins
     - role: ansible-role-nginx
   post_tasks:
-    template:
-      src: "{{ playbook_dir }}/files/nginx_jenkins.j2"
-      dest: "/etc/nginx/sites-enabled/jenkins.conf"
-    service:
-      name: nginx
-      state: restarted
+    # - file:
+    #     path: /etc/nginx/sites-enabled
+    #     state: directory
+    - template:
+        src: "{{ playbook_dir }}/files/nginx_jenkins.j2"
+        dest: "/etc/nginx/conf.d/jenkins.conf"
+    - service:
+        name: nginx
+        state: restarted
       
