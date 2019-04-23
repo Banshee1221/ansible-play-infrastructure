@@ -39,7 +39,7 @@
     - slurm
 
 - hosts: monitoring
-  become: true
+  become: yes
   pre_tasks:
     - name: Ensure consul group
       group:

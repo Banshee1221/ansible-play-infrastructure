@@ -34,4 +34,7 @@ consul_configd_path: /monitoring/consul/conf.d
 consul_data_path: /monitoring/consul/data
 consul_domain: sanbi.ac.za
 consul_node_role: bootstrap
-consul_group_name: consul
+consul_user: consul
+consul_group: consul
+consul_group_name: monitoring
+consul_install_remotely: true
