@@ -40,6 +40,10 @@
 
 - hosts: monitoring
   become: true
+  pre-tasks:
+    - name: Ensure python-jmespath
+      pip: jmespath
+      state: present
   roles:
     - role: cloudalchemy.ansible-prometheus
     - role: cloudalchemy.ansible-grafana
