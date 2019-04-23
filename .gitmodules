@@ -25,3 +25,9 @@
 [submodule "roles/ansible-role-nginx"]
 	path = roles/ansible-role-nginx
 	url = https://github.com/nginxinc/ansible-role-nginx.git
+[submodule "roles/cloudalchemy.ansible-prometheus"]
+	path = roles/cloudalchemy.ansible-prometheus
+	url = https://github.com/cloudalchemy/ansible-prometheus.git
+[submodule "roles/cloudalchemy.ansible-grafana"]
+	path = roles/cloudalchemy.ansible-grafana
+	url = https://github.com/cloudalchemy/ansible-grafana.git

@@ -38,6 +38,12 @@
   tags:
     - slurm
 
+- hosts: monitoring
+  become: true
+  roles:
+    - role: cloudalchemy.ansible-prometheus
+    - role: cloudalchemy.ansible-grafana
+
 - hosts: jenkins
   become: true
   pre_tasks:
