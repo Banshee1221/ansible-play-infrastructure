@@ -17,8 +17,10 @@ grafana_version: "6.1.4"
 grafana_instance: "monitor.sanbi.ac.za"
 grafana_address: 0.0.0.0
 grafana_port: 3000
+grafana_logs_dir: /monitoring/grafana/
+grafana_data_dir: /monitoring/grafana/
 grafana_security: { admin_user: admin, admin_password: "" }
-grafana_database: { type: sqlite3, path: '/monitoring/grafana/db/grafana.db' }
+grafana_database: { type: sqlite3 }
 grafana_datasources:
   - name: prometheus
     type: prometheus
