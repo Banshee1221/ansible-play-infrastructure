@@ -40,7 +40,7 @@
 
 - hosts: monitoring
   become: true
-  pre-tasks:
+  pre_tasks:
     - name: Ensure python-jmespath
       pip:
         name: jmespath
