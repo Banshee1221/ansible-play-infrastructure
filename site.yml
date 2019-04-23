@@ -43,6 +43,8 @@
   roles:
     - role: cloudalchemy.ansible-prometheus
     - role: cloudalchemy.ansible-grafana
+  tags:
+    - monitor_server
 
 - hosts: jenkins
   become: true
