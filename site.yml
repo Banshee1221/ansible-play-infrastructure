@@ -40,6 +40,13 @@
 
 - hosts: monitoring
   become: true
+  pre_tasks:
+    - name: Ensure consul user
+      user:
+        name: consul
+        groups: consul
+        state: present
+        create_home: no
   roles:
     - role: cloudalchemy.ansible-prometheus
     - role: cloudalchemy.ansible-grafana
