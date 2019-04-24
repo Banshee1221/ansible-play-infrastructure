@@ -62,3 +62,4 @@ consul_install_remotely: true
 consul_client_address: 0.0.0.0
 consul_ui: false
 consul_node_role: client
+consul_datacenter: SANBI
