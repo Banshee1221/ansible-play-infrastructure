@@ -30,10 +30,9 @@ consul_config_path: /monitoring/consul/
 consul_configd_path: /monitoring/consul/conf.d
 consul_data_path: /monitoring/consul/data
 consul_domain: sanbi.ac.za
-consul_node_role: bootstrap
+consul_node_role: client
 consul_user: consul
 consul_group: consul
-consul_group_name: monitoring
 consul_install_remotely: true
 consul_client_address: 0.0.0.0
 consul_ui: true

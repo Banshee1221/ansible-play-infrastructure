@@ -24,10 +24,15 @@ cmc1-08-hpc-hm.sanbi.ac.za
 cmc1-09-hpc.sanbi.ac.za
 
 [monitoring]
-monitor.sanbi.ac.za monitor_server=True enable_monitoring=False
+monitor.sanbi.ac.za monitor_server=True enable_monitoring=False consul_node_role=bootstrap
 
 #[remote]
 #tunnel.sanbi.ac.za
 
 #[jenkins]
 #jenkins.sanbi.ac.za
+
+# List of all machines to be added to consul
+[consul_instances:children]
+monitoring
+slurm
