@@ -61,6 +61,8 @@
       create_home: no
   roles:
     - role: brianshumate.ansible-consul
+      vars:
+        - consul_services: "{{ consul_services_headnode if (headnode is defined) else consul_services}}"
   tags:
     - consul
 
