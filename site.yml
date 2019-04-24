@@ -16,6 +16,11 @@
     - role: ansible-role-common
       tags:
         - common
+
+- hosts: remote
+  become: true
+  roles:
+    - role: ansible-role-gateway
  
 - hosts: database
   become: true
@@ -32,3 +37,49 @@
   - role: ansible-role-cluster 
   tags:
     - slurm
+
+- hosts: monitoring
+  become: yes
+  pre_tasks:
+    - name: Ensure consul group
+      group:
+        name: consul
+        state: present
+    - name: Ensure consul user
+      user:
+        name: consul
+        groups: consul
+        state: present
+        create_home: no
+  roles:
+    - role: cloudalchemy.ansible-prometheus
+    - role: cloudalchemy.ansible-grafana
+    - role: brianshumate.ansible-consul
+  tags:
+    - monitor_server
+
+- hosts: jenkins
+  become: true
+  pre_tasks:
+    - name: Set the java_packages variable (Ubuntu).
+      set_fact:
+        java_packages:
+          - openjdk-8-jdk
+    - name: update cache
+      apt:
+        update_cache: true
+  roles:
+    - role: geerlingguy.java
+    - role: geerlingguy.jenkins
+    - role: ansible-role-nginx
+  post_tasks:
+    # - file:
+    #     path: /etc/nginx/sites-enabled
+    #     state: directory
+    - template:
+        src: "{{ playbook_dir }}/files/nginx_jenkins.j2"
+        dest: "/etc/nginx/conf.d/jenkins.conf"
+    - service:
+        name: nginx
+        state: restarted
+      

@@ -1,0 +1,39 @@
+enable_node_exporter: True
+
+# Prometheus setup
+prometheus_version: 2.9.1
+prometheus_config_dir: /monitoring/prometheus/conf
+prometheus_db_dir: /monitoring/prometheus/db
+prometheus_web_listen_address: "0.0.0.0:9090"
+#prometheus_web_external_url: "https://monitoring.sanbi.ac.za"
+prometheus_storage_retention: "90d"
+prometheus_global: { scrape_interval: 30s, scrape_timeout: 15s, evaluation_interval: 15s }
+
+# Grafana setup
+grafana_version: "6.1.4"
+grafana_instance: "monitor.sanbi.ac.za"
+grafana_address: 0.0.0.0
+grafana_port: 3000
+grafana_logs_dir: /monitoring/grafana/
+grafana_data_dir: /monitoring/grafana/
+grafana_security: { admin_user: admin, admin_password: "" }
+grafana_database: { type: sqlite3 }
+grafana_datasources:
+  - name: prometheus
+    type: prometheus
+    access: proxy
+    url: 'http://{{ prometheus_web_listen_address }}'
+    basicAuth: false
+
+# Consol setup
+consul_config_path: /monitoring/consul/
+consul_configd_path: /monitoring/consul/conf.d
+consul_data_path: /monitoring/consul/data
+consul_domain: sanbi.ac.za
+consul_node_role: bootstrap
+consul_user: consul
+consul_group: consul
+consul_group_name: monitoring
+consul_install_remotely: true
+consul_client_address: 0.0.0.0
+consul_ui: true

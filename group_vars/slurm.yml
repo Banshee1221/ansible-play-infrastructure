@@ -1,0 +1,6 @@
+cephfs_client_mapping:
+  - {"src": "/people", "dst": "/usr/people", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:token')}}"}
+  - {"src": "/tools", "dst": "/tools", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:token')}}"}
+  - {"src": "/projects/irida", "dst": "/projects/irida", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida:token')}}"}
+  - {"src": "/projects/irida-dev", "dst": "/projects/irida-dev", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida-dev:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida-dev:token')}}"}
+  - {"src": "/projects/galaxy", "dst": "/projects/galaxy", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/galaxy:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/galaxy:token')}}"}
