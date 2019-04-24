@@ -40,23 +40,30 @@
 
 - hosts: monitoring
   become: yes
-  pre_tasks:
-    - name: Ensure consul group
-      group:
-        name: consul
-        state: present
-    - name: Ensure consul user
-      user:
-        name: consul
-        groups: consul
-        state: present
-        create_home: no
   roles:
     - role: cloudalchemy.ansible-prometheus
     - role: cloudalchemy.ansible-grafana
-    - role: brianshumate.ansible-consul
   tags:
     - monitor_server
+
+- hosts: consul_instances
+  become: yes
+  pre_tasks:
+  - name: Ensure consul group
+    group:
+      name: consul
+      state: present
+  - name: Ensure consul user
+    user:
+      name: consul
+      groups: consul
+      state: present
+      create_home: no
+  roles:
+    - role: brianshumate.ansible-consul
+  tags:
+    - consul
+
 
 - hosts: jenkins
   become: true
