@@ -52,3 +52,13 @@ jenkins_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/jenkins
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Africa/Johannesburg"
 jenkins_plugins: ['ssh-slaves', 'github', 'github-oauth', 'pipeline-model-definition']
 
+# Consul
+
+
+consul_domain: sanbi.ac.za
+consul_user: consul
+consul_group: consul
+consul_install_remotely: true
+consul_client_address: 0.0.0.0
+consul_ui: false
+consul_node_role: client
