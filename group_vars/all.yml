@@ -1,3 +1,6 @@
+node_exporter_version: 0.17.0
+consul_version: 1.4.4
+
 #
 # Common Role
 #
@@ -48,3 +51,4 @@ jenkins_admin_username: "{{ lookup('hashi_vault', 'secret=secret/ansible/jenkins
 jenkins_admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/jenkins:password')}}"
 jenkins_java_options: "-Djenkins.install.runSetupWizard=false -Dorg.apache.commons.jelly.tags.fmt.timeZone=Africa/Johannesburg"
 jenkins_plugins: ['ssh-slaves', 'github', 'github-oauth', 'pipeline-model-definition']
+
