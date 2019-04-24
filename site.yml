@@ -59,10 +59,10 @@
       groups: consul
       state: present
       create_home: no
+  - set_fact:
+      consul_services: "{{ consul_services_headnode if (headnode is defined) else consul_services}}"
   roles:
     - role: brianshumate.ansible-consul
-      vars:
-        - consul_services: "{{ consul_services_headnode if (headnode is defined) else consul_services}}"
   tags:
     - consul
 
