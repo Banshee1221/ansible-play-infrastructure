@@ -22,10 +22,16 @@ prometheus_scrape_configs:
     consul_sd_configs:
       - server: 'localhost:8500'
     relabel_configs:
-      - source_labels: [__meta_consul_service]
+      - source_labels:
+          - __meta_consul_node
+        regex: '(.*)'
+        replacement: '${1}:9100'
+        target_label: instance
+      - action: keep
         regex: .*node_exporter.*
-        action: keep
-        target_label: service
+        source_labels:
+          - __meta_consul_service
+        target_label: __address__
 
 
 
