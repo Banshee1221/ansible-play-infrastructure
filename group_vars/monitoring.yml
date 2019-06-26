@@ -59,7 +59,7 @@ consul_node_role: bootstrap
 consul_ui: true
 
 #alertmanager
-alertmanager_external_url: {{inventory_hostname}}
+alertmanager_external_url: "{{inventory_hostname}}"
 alertmanager_config_dir: "/monitoring/alertmanager/conf"
 alertmanager_db_dir: "/monitoring/alertmanager/db"
 alertmanager_slack_api_url: "https://hooks.slack.com/services/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"
