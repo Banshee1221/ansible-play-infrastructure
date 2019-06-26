@@ -34,3 +34,6 @@
 [submodule "roles/brianshumate.ansible-consul"]
 	path = roles/brianshumate.ansible-consul
 	url = https://github.com/brianshumate/ansible-consul.git
+[submodule "roles/cloudalchemy.ansible-alertmanager"]
+	path = roles/cloudalchemy.ansible-alertmanager
+	url = https://github.com/cloudalchemy/ansible-alertmanager.git

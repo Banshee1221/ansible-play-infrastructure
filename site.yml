@@ -43,6 +43,7 @@
   roles:
     - role: cloudalchemy.ansible-prometheus
     - role: cloudalchemy.ansible-grafana
+    - role: cloudalchemy.ansible-alertmanager
   tags:
     - monitor_server
 

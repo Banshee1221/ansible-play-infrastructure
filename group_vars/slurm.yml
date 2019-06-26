@@ -4,7 +4,7 @@ cephfs_client_mapping:
   - {"src": "/projects/irida", "dst": "/projects/irida", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida:token')}}"}
   - {"src": "/projects/irida-dev", "dst": "/projects/irida-dev", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida-dev:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/irida-dev:token')}}"}
   - {"src": "/projects/galaxy", "dst": "/projects/galaxy", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/galaxy:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/galaxy:token')}}"}
-
+  - {"src": "/projects/data", "dst": "/projects/data", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/raw_data:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/raw_data:token')}}"}
 
 consul_services:
   - name: node_exporter
