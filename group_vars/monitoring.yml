@@ -5,6 +5,19 @@ prometheus_version: 2.9.1
 prometheus_config_dir: /monitoring/prometheus/conf
 prometheus_db_dir: /monitoring/prometheus/db
 prometheus_web_listen_address: "0.0.0.0:9090"
+prometheus_alertmanager_config: 
+  - static_configs:
+      - targets:
+        - 'monitor.sanbi.ac.za:9093'
+prometheus_alert_rules:
+  - alert: InstanceDown
+    expr: "up == 0"
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      description: "{% raw %}{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.{% endraw %}"
+      summary: "{% raw %}Instance {{ $labels.instance }} down{% endraw %}"
 #prometheus_web_external_url: "https://monitoring.sanbi.ac.za"
 prometheus_storage_retention: "90d"
 prometheus_global: { scrape_interval: 30s, scrape_timeout: 15s, evaluation_interval: 15s }
@@ -62,4 +75,13 @@ consul_ui: true
 alertmanager_external_url: "{{inventory_hostname}}"
 alertmanager_config_dir: "/monitoring/alertmanager/conf"
 alertmanager_db_dir: "/monitoring/alertmanager/db"
-alertmanager_slack_api_url: "https://hooks.slack.com/services/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"
+alertmanager_external_url: http://monitor.sanbi.ac.za:9093/
+alertmanager_slack_api_url: "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/slack:alert_webhook_url')}}"
+alertmanager_route:
+  group_by: [alertname, job]
+  receiver: 'slack-notifications'
+alertmanager_receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+    - channel: '#alerts'
+      text: 'https://internal.myorg.net/wiki/alerts/{% raw %}{{ .GroupLabels.app }}/{{ .GroupLabels.alertname }}{% endraw %}'
