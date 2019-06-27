@@ -9,15 +9,7 @@ prometheus_alertmanager_config:
   - static_configs:
       - targets:
         - 'monitor.sanbi.ac.za:9093'
-prometheus_alert_rules:
-  - alert: InstanceDown
-    expr: "up == 0"
-    for: 5m
-    labels:
-      severity: critical
-    annotations:
-      description: "{% raw %}{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes.{% endraw %}"
-      summary: "{% raw %}Instance {{ $labels.instance }} down{% endraw %}"
+prometheus_alert_rules_files: "{{ playbook_dir }}/files/prometheus/alert_rules/*.rules"
 #prometheus_web_external_url: "https://monitoring.sanbi.ac.za"
 prometheus_storage_retention: "90d"
 prometheus_global: { scrape_interval: 30s, scrape_timeout: 15s, evaluation_interval: 15s }
