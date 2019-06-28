@@ -62,6 +62,8 @@ consul_config_path: /monitoring/consul/
 consul_configd_path: /monitoring/consul/conf.d
 consul_data_path: /monitoring/consul/data
 consul_node_role: bootstrap
+consul_iface: enp2s0
+consul_bind_address: "{{ ansible_all_ipv4_addresses | ipaddr('192.168.2.0/24') | first }}"
 consul_ui: true
 
 #alertmanager
