@@ -54,7 +54,6 @@ jenkins_plugins: ['ssh-slaves', 'github', 'github-oauth', 'pipeline-model-defini
 
 # Consul
 
-
 consul_domain: sanbi.ac.za
 consul_user: consul
 consul_group: consul

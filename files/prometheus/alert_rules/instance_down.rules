@@ -9,5 +9,3 @@ groups:
     annotations:
         description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 minutes."
         summary: "Instance {{ $labels.instance }} down"
-
-

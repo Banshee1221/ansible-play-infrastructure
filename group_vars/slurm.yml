@@ -9,15 +9,15 @@ cephfs_client_mapping:
 consul_services:
   - name: node_exporter
     id: node_exporter
-    tags: ["{{ group_names | join(', ') }}"]
+    tags: "{{ group_names }}"
     port: 9100
   
 consul_services_headnode:
   - name: node_exporter
     id: node_exporter
-    tags: ["{{ group_names | join(', ') }}"]
+    tags: "{{ group_names }}"
     port: 9100
   - name: slurm_exporter
     id: slurm_exporter
-    tags: ["{{ group_names | join(', ') }}"]
+    tags: "{{ group_names }}"
     port: 8080
