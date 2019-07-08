@@ -10,6 +10,7 @@
       changed_when: output.stdout != ""
       tags:
         - presetup
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     - name: Gathering Facts
       setup:
   roles:

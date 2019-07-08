@@ -32,7 +32,14 @@ monitor.sanbi.ac.za monitor_server=True enable_monitoring=False consul_node_role
 #[jenkins]
 #jenkins.sanbi.ac.za
 
+[freenas]
+backblaze.sanbi.ac.za ansible_ssh_user=root consul_version=1.4.4 consul_syslog_enable=false
+
+[freenas:vars]
+ansible_python_interpreter=/usr/local/bin/python
+
 # List of all machines to be added to consul
 [consul_instances:children]
 monitoring
 slurm
+freenas
