@@ -28,7 +28,7 @@ db_port: 3306
 slurm_version: 17.02.11
 slurm_install_dir: /tools/admin/slurm
 slurm_mariadb_name: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_user')}}"
-slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_password')}}"
+slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_pass')}}"
 # Enable Slurm DRMAA for Galaxy
 slurm_drmaa_support: True
 slurm_drmaa_version: 1.2.0-dev.44cc67e
