@@ -5,6 +5,7 @@ prometheus_version: 2.17.1
 prometheus_config_dir: /monitoring/prometheus/conf
 prometheus_db_dir: /monitoring/prometheus/db
 prometheus_web_listen_address: "0.0.0.0:9090"
+prometheus_config_file: "{{ playbook_dir }}/files/prometheus/prometheus.yml.j2"
 prometheus_alert_rules_files: "{{ playbook_dir }}/files/prometheus/alert_rules/*.rules"
 #prometheus_web_external_url: "https://monitoring.sanbi.ac.za"
 prometheus_storage_retention: "90d"
