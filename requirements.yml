@@ -1,0 +1,51 @@
+- name: ansible-role-cephfs_client
+  src: https://github.com/SANBI-SA/ansible-role-cephfs_client
+  version: master
+
+- name: ansible-role-cluster
+  src: https://github.com/SANBI-SA/ansible-role-cluster
+  version: master
+
+- name: ansible-role-common
+  src: https://github.com/SANBI-SA/ansible-role-common
+  version: master
+
+# - name: ansible-role-gateway
+#   src: https://github.com/SANBI-SA/ansible-role-gateway
+#   version: master
+
+- name: ansible-role-mariadb
+  src: https://github.com/tschifftner/ansible-role-mariadb
+  version: master
+
+- name: ansible-role-nginx
+  src: https://github.com/nginxinc/ansible-role-nginx
+  version: master
+
+- name: ansible-role-slurm
+  src: https://github.com/SANBI-SA/ansible-role-slurm
+  version: master
+
+- name: brianshumate.ansible-consul
+  src: https://github.com/ansible-community/ansible-consul
+  version: master
+
+- name: cloudalchemy.ansible-grafana
+  src: https://github.com/cloudalchemy/ansible-grafana
+  version: master
+
+- name: cloudalchemy.ansible-alertmanager
+  src: https://github.com/cloudalchemy/ansible-alertmanager
+  version: master
+
+- name: cloudalchemy.ansible-prometheus
+  src: https://github.com/cloudalchemy/ansible-prometheus
+  version: master
+
+- name: geerlingguy.java
+  src: https://github.com/geerlingguy/ansible-role-java
+  version: master
+
+# - name: geerlingguy.jenkins
+#   src: https://github.com/geerlingguy/ansible-role-jenkins
+#   version: master

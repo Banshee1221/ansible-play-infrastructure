@@ -1,5 +1,14 @@
 ---
 
+#########################################################################################
+#                                                                                       #
+#  Pre-tasks:                                                                           #
+#    - Installs python2 on all machines (for backwards compatibility with some roles).  #
+#                                                                                       #
+#  Tasks:                                                                               #
+#    - Runs the common role against all servers in the inventory.                       #
+#                                                                                       #
+#########################################################################################
 - hosts: all
   become: true
   gather_facts: false
@@ -17,13 +26,13 @@
     - role: ansible-role-common
       tags:
         - common
-
-- hosts: remote
-  become: true
-  roles:
-    - role: ansible-role-gateway
-  tags: remote
  
+####################################################################
+#                                                                  #
+#  Tasks:                                                          #
+#    - Provisions the mariadb server for most of SANBI's services  #
+#                                                                  #
+####################################################################
 - hosts: database
   become: true
   roles:
@@ -31,6 +40,14 @@
   tags:
     - database
 
+#############################################
+#                                           #
+#  Tasks:                                   #
+#    - Activates cephfs shares on machines  #
+#    - Installs slurm and slurm drmaa       #
+#    - Performs cluster machine tweaks      #
+#                                           #
+#############################################
 - hosts: slurm
   become: true
   roles:
@@ -40,6 +57,14 @@
   tags:
     - slurm
 
+###############################
+#                             #
+#  Tasks:                     #
+#    - Installs prometheus    #
+#    - Installs grafana       #
+#    - Installs alertmanager  #
+#                             #
+###############################
 - hosts: monitoring
   become: yes
   roles:
@@ -49,6 +74,14 @@
   tags:
     - monitor_server
 
+#############################################################################
+#                                                                           #
+#  Pre-tasks:                                                               #
+#    - Creates a consul user and group for each machine                     #
+#  Tasks:                                                                   #
+#    - Ensures consul server and agent installed on all necessary machines  #
+#                                                                           #
+#############################################################################
 - hosts: consul_instances
   become: yes
   pre_tasks:
@@ -69,31 +102,48 @@
   tags:
     - consul
 
+####
+#  Tasks:
+#    - Provisions the gate replacement (external ssh access box).
+####
+#- hosts: remote
+#  become: true
+#  roles:
+#    - role: ansible-role-gateway
+#  tags: remote
 
-- hosts: jenkins
-  become: true
-  pre_tasks:
-    - name: Set the java_packages variable (Ubuntu).
-      set_fact:
-        java_packages:
-          - openjdk-8-jdk
-    - name: update cache
-      apt:
-        update_cache: true
-  roles:
-    - role: geerlingguy.java
-    - role: geerlingguy.jenkins
-    - role: ansible-role-nginx
-  post_tasks:
-    # - file:
-    #     path: /etc/nginx/sites-enabled
-    #     state: directory
-    - template:
-        src: "{{ playbook_dir }}/files/nginx_jenkins.j2"
-        dest: "/etc/nginx/conf.d/jenkins.conf"
-    - service:
-        name: nginx
-        state: restarted
-  tags:
-    - jenkins
+####
+#  Pre-tasks
+#    - Set variables and install packages
+#  Tasks:
+#    - Install java
+#    - Install jenkins
+#    - Install nginx
+####
+# - hosts: jenkins
+#   become: true
+#   pre_tasks:
+#     - name: Set the java_packages variable (Ubuntu).
+#       set_fact:
+#         java_packages:
+#           - openjdk-8-jdk
+#     - name: update cache
+#       apt:
+#         update_cache: true
+#   roles:
+#     - role: geerlingguy.java
+#     - role: geerlingguy.jenkins
+#     - role: ansible-role-nginx
+#   post_tasks:
+#     # - file:
+#     #     path: /etc/nginx/sites-enabled
+#     #     state: directory
+#     - template:
+#         src: "{{ playbook_dir }}/files/nginx_jenkins.j2"
+#         dest: "/etc/nginx/conf.d/jenkins.conf"
+#     - service:
+#         name: nginx
+#         state: restarted
+#   tags:
+#     - jenkins
       

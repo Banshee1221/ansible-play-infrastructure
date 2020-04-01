@@ -1,5 +1,5 @@
-node_exporter_version: 0.17.0
-consul_version: 1.4.4
+node_exporter_version: 0.18.1
+consul_version: 1.7.0
 
 #
 # Common Role
@@ -33,12 +33,14 @@ slurm_mariadb_pass: "{{ lookup('hashi_vault', 'secret=secret/ansible/slurm:db_pa
 slurm_drmaa_support: True
 slurm_drmaa_version: 1.2.0-dev.44cc67e
 conf_dir: /tmp
+
 #
 # roles/ansible-role-cephfs_client
 #
 cephfs_client_mapping:
   - {"src": "/people", "dst": "/usr/people", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people:token')}}"}
   - {"src": "/tools", "dst": "/tools", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/tools:token')}}"}
+
 #
 # roles/ansible-role-cluster
 #
@@ -62,3 +64,6 @@ consul_client_address: 0.0.0.0
 consul_ui: false
 consul_node_role: client
 consul_datacenter: SANBI
+consul_config_custom:
+  leave_on_terminate: false
+  skip_leave_on_interrupt: true

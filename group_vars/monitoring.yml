@@ -1,54 +1,22 @@
 enable_node_exporter: True
 
 # Prometheus setup
-prometheus_version: 2.9.1
+prometheus_version: 2.17.1
 prometheus_config_dir: /monitoring/prometheus/conf
 prometheus_db_dir: /monitoring/prometheus/db
 prometheus_web_listen_address: "0.0.0.0:9090"
-prometheus_alertmanager_config: 
-  - static_configs:
-      - targets:
-        - 'monitor.sanbi.ac.za:9093'
-prometheus_alert_rules: []
 prometheus_alert_rules_files: "{{ playbook_dir }}/files/prometheus/alert_rules/*.rules"
 #prometheus_web_external_url: "https://monitoring.sanbi.ac.za"
 prometheus_storage_retention: "90d"
-prometheus_global: { scrape_interval: 30s, scrape_timeout: 15s, evaluation_interval: 15s }
-prometheus_scrape_configs:
-  - job_name: "prometheus"    # Custom scrape job, here using `static_config`
-    metrics_path: "/metrics"
-    static_configs:
-      - targets:
-          - "localhost:9090"
-  - job_name: "static nodes"
-    file_sd_configs:
-      - files:
-          - "{{ prometheus_config_dir }}/file_sd/node.yml" # This line loads file created from `prometheus_targets`
-  - job_name: consul_node_exporter
-    consul_sd_configs:
-      - server: 'localhost:8500'
-    relabel_configs:
-      - source_labels:
-          - __meta_consul_node
-        regex: '(.*)'
-        replacement: '${1}:9100'
-        target_label: instance
-      - action: keep
-        regex: .*node_exporter.*
-        source_labels:
-          - __meta_consul_service
-        target_label: __address__
-
-
 
 # Grafana setup
-grafana_version: "6.1.4"
+grafana_version: "6.7.1"
 grafana_instance: "monitor.sanbi.ac.za"
 grafana_address: 0.0.0.0
 grafana_port: 3000
 grafana_logs_dir: /monitoring/grafana/
 grafana_data_dir: /monitoring/grafana/
-grafana_security: { admin_user: admin, admin_password: "" }
+grafana_security: "{ admin_user: {{ lookup('hashi_vault', 'secret=secret/ansible/grafana:username')}}, admin_password: {{ lookup('hashi_vault', 'secret=secret/ansible/grafana:password')}} }"
 grafana_database: { type: sqlite3 }
 grafana_datasources:
   - name: prometheus
@@ -71,13 +39,5 @@ consul_ui: true
 alertmanager_config_dir: "/monitoring/alertmanager/conf"
 alertmanager_db_dir: "/monitoring/alertmanager/db"
 alertmanager_external_url: http://monitor.sanbi.ac.za:9093/
-alertmanager_slack_api_url: "{{ lookup('hashi_vault', 'secret=secret/ansible/slack:alert_webhook_url') }}"
-alertmanager_route:
-  group_by: [alertname, job, instance]
-  receiver: 'slack-notifications'
-alertmanager_receivers:
-  - name: 'slack-notifications'
-    slack_configs:
-    - channel: '#alerts'
-      title: "[!] ALERT -- {% raw %}{{ .GroupLabels.instance }}{% endraw %} is {% raw %}{{ .GroupLabels.alertname }}{% endraw %}! "
-      text: '• Root: {% raw %}{{ .GroupLabels.job }}{% endraw %}'
+alertmanager_config_file: "{{ playbook_dir }}/files/monitoring/alertmanager/alertmanager.yml.j2"
+alertmanager_slack_channel: "#alerts"

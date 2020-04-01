@@ -1,0 +1,21 @@
+groups:
+- name: consul_status
+  rules:
+  - alert: Consul Node Status Critical
+    expr: "consul_health_node_status{status='critical'} != 0"
+    for: 1m
+    labels:
+        severity: critical
+        cosnul_status: critical
+    annotations:
+        description: "\"{{ $labels.node }}\" of job \"{{ $labels.job }}\" has been critical for more than 1 minute."
+        summary: "Instance \"{{ $labels.node }}\" status is CRITICAL"
+  - alert: Consul Node Status Warn
+    expr: "consul_health_node_status{status='warning'} != 0"
+    for: 1m
+    labels:
+        severity: warning
+        consul_status: warning
+    annotations:
+        description: "\"{{ $labels.node }}\" of job \"{{ $labels.job }}\" has been warning for more than 1 minute."
+        summary: "Instance \"{{ $labels.node }}\" status is WARN"

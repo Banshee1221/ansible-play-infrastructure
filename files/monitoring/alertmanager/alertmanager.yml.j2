@@ -1,0 +1,39 @@
+global:
+  resolve_timeout: 3m
+  slack_api_url: {{ lookup('hashi_vault', 'secret=secret/ansible/slack:alert_webhook_url') }}
+
+templates:
+- '{{ alertmanager_config_dir }}/templates/*.tmpl'
+
+receivers:
+- name: slack-notifications
+  slack_configs:
+  - channel: '{{ alertmanager_slack_channel }}'
+    username: 'Alert Manager'
+    color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+    title: '{{ template "slack.default.title" . }}'
+    title_link: '{{ template "slack.default.titlelink" . }}'
+    pretext: '*_{{ .CommonAnnotations.summary }}_*'
+    text: |-
+
+      {{ range .Alerts }}
+          
+          *Alert:* {{ .Annotations.summary }} - `{{ .Labels.severity }}`
+          
+          *Description:* {{ .Annotations.description }}
+          
+          *Details:*
+            {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+            {{ end }}
+      {{ end }}
+    fallback: '{{ template "slack.default.fallback" . }}'
+    icon_emoji: '{{ template "slack.default.iconemoji" . }}'
+    icon_url: '{{ template "slack.default.iconurl" . }}'
+    send_resolved: True
+
+route:
+  group_by:
+  - alertname
+  - job
+  - instance
+  receiver: slack-notifications
