@@ -5,6 +5,7 @@ global:
 templates:
 - '{{ alertmanager_config_dir }}/templates/*.tmpl'
 
+{% raw %}
 receivers:
 - name: slack-notifications
   slack_configs:
@@ -30,6 +31,7 @@ receivers:
     icon_emoji: '{{ template "slack.default.iconemoji" . }}'
     icon_url: '{{ template "slack.default.iconurl" . }}'
     send_resolved: True
+{% endraw %}
 
 route:
   group_by:

@@ -17,7 +17,7 @@ grafana_address: 0.0.0.0
 grafana_port: 3000
 grafana_logs_dir: /monitoring/grafana/
 grafana_data_dir: /monitoring/grafana/
-grafana_security: "{ admin_user: {{ lookup('hashi_vault', 'secret=secret/ansible/grafana:username')}}, admin_password: {{ lookup('hashi_vault', 'secret=secret/ansible/grafana:password')}} }"
+grafana_security: { admin_user: "{{ lookup('hashi_vault', 'secret=secret/ansible/grafana:username')}}", admin_password: "{{ lookup('hashi_vault', 'secret=secret/ansible/grafana:password')}}" }
 grafana_database: { type: sqlite3 }
 grafana_datasources:
   - name: prometheus
