@@ -1,0 +1,30 @@
+groups:
+- name: ceph rules
+  rules:
+
+  - alert: CephStatusWarn
+    expr: "ceph_health_status == 1"
+    for: 5m
+    labels:
+        severity: warning
+    annotations:
+        description: "Ceph cluster is reporting a status of \"WARNING\" for more than 5 minutes. Agent: \"{{ $labels.instance }}\"."
+        summary: "Ceph status is WARNING."
+
+  - alert: CephStatusErr
+    expr: "ceph_health_status == 2"
+    for: 1m
+    labels:
+        severity: critical
+    annotations:
+        description: "Ceph cluster is reporting a status of \"ERROR\" for more than 1 minute. Agent: \"{{ $labels.instance }}\"."
+        summary: "Ceph status is ERROR."
+
+  - alert: CephOsdDown
+    expr: "ceph_osd_up != 1"
+    for: 5m
+    labels:
+        severity: critical
+    annotations:
+        description: "Ceph OSD \"{{ $labels.ceph_daemon }}\" has been marked as \"DOWN\". Agent: \"{{ $labels.instance }}\"."
+        summary: "OSD \"{{ $labels.ceph_daemon }}\" DOWN."
