@@ -1,0 +1,5 @@
+cephfs_client_mapping:
+  - {"src": "/people", "dst": "/usr/people", "id": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people_ro:id')}}", "key": "{{ lookup('hashi_vault', 'secret=secret/ansible/cephfs/people_ro:token')}}"}
+
+company_name: SANBI
+remote_server_name: Gate

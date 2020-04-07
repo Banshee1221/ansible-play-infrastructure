@@ -22,10 +22,15 @@
         - presetup
     - name: Gathering Facts
       setup:
+  tags:
+    - always
+
+- hosts: all
+  become: True
   roles:
-    - role: ansible-role-common
-      tags:
-        - common
+  - role: ansible-role-common
+  tags:
+    - common
  
 ####################################################################
 #                                                                  #
@@ -102,15 +107,18 @@
   tags:
     - consul
 
-####
-#  Tasks:
-#    - Provisions the gate replacement (external ssh access box).
-####
-#- hosts: remote
-#  become: true
-#  roles:
-#    - role: ansible-role-gateway
-#  tags: remote
+####################################################################
+#                                                                  #
+#  Tasks:                                                          #
+#    - Provisions the gate replacement (external ssh access box).  #
+#                                                                  #
+####################################################################
+- hosts: remote
+  become: true
+  roles:
+    - role: ansible-role-cephfs_client
+    - role: ansible-role-gateway
+  tags: remote
 
 ####
 #  Pre-tasks
